@@ -1,18 +1,16 @@
 <script>
   export let name;
-  export let addActivePlayer;
+  export let removeActivePlayer;
 </script>
 
-<div on:click={addActivePlayer(name)}>
+<div on:click={removeActivePlayer(name)}>
   {name}
 </div>
 
 <style>
   div {
-    background-color: #fff;
     border-radius: 5px;
     box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.2);
-    margin: 10px 0px;
     padding: 5px 10px;
     transition: box-shadow ease-in .2s;
   }
