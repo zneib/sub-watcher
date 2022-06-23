@@ -2,9 +2,11 @@
   import Person from './Person.svelte';
   import Player from './Player.svelte';
 
+  let showPlayersForm = false;
   let people = JSON.parse(localStorage.getItem('people')) ?? [];
-  let inactivePlayers = JSON.parse(localStorage.getItem('inactivePlayers')) ?? [];
   let activePlayers = JSON.parse(localStorage.getItem('activePlayers')) ?? [];
+
+  console.log(showPlayersForm);
 
   const addPlayer = (e) => {
     for (const field of e.target) {
@@ -26,13 +28,18 @@
 </script>
 
 <main>
-  <form on:submit|preventDefault={addPlayer}>
-    <div>
-      <label for="firstName">First Name</label>
-      <input type="text" name="firstName">
-    </div>
-    <button type="submit">Add</button>
-  </form>
+  <button on:click={() => showPlayersForm = !showPlayersForm}>
+    {showPlayersForm ? 'Close' : 'Add Players'}
+  </button>
+  {#if showPlayersForm}
+    <form on:submit|preventDefault={addPlayer}>
+      <div>
+        <label for="firstName">First Name</label>
+        <input type="text" name="firstName">
+      </div>
+      <button type="submit">Add</button>
+    </form>
+  {/if}
   {#each people as person}
     <Person name={person} addActivePlayer={addActivePlayer} />
   {/each}
@@ -55,6 +62,24 @@
     margin: 0 auto;
     background-color: #eee;
     max-width: 400px;
+  }
+
+  form {
+    margin: 15px auto;
+    background: #fff;
+    padding: 10px;
+    width: 200px;
+  }
+
+  label {
+    font-variant: small-caps;
+  }
+
+  button[type="submit"] {
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    padding: 5px 10px;
   }
 
   label {
