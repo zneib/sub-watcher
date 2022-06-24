@@ -6,8 +6,6 @@
   let people = JSON.parse(localStorage.getItem('people')) ?? [];
   let activePlayers = JSON.parse(localStorage.getItem('activePlayers')) ?? [];
 
-  console.log(showPlayersForm);
-
   const addPlayer = (e) => {
     for (const field of e.target) {
       if (field?.type !== 'submit') {
@@ -21,11 +19,15 @@
   const addActivePlayer = (player) => {
     activePlayers = [...activePlayers, player];
     people = people.filter((name) => name !== player);
+    localStorage.setItem('activePlayers', JSON.stringify(activePlayers));
+    localStorage.setItem('people', JSON.stringify(people));
   }
 
   const removeActivePlayer = (player) => {
     activePlayers = activePlayers.filter((name) => name !== player);
     people = [...people, player];
+    localStorage.setItem('activePlayers', JSON.stringify(activePlayers));
+    localStorage.setItem('people', JSON.stringify(people));
   }
 </script>
 
@@ -89,6 +91,7 @@
 
   h2 {
     margin-top: 0;
+    text-align: center;
   }
 
   form {
