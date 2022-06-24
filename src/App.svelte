@@ -20,10 +20,12 @@
   
   const addActivePlayer = (player) => {
     activePlayers = [...activePlayers, player];
+    people = people.filter((name) => name !== player);
   }
 
   const removeActivePlayer = (player) => {
-    activePlayers = activePlayers.filter((name) => name !== player)
+    activePlayers = activePlayers.filter((name) => name !== player);
+    people = [...people, player];
   }
 </script>
 
@@ -117,6 +119,7 @@
     border-radius: 5px;
     border: 2px solid #ccc;
     padding: 5px 10px;
+    transition: border .2s ease-in;
   }
   button:hover {
     border: 2px solid rgb(129, 129, 129);
