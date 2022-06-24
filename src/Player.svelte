@@ -9,8 +9,10 @@
 
 <style>
   div {
+    background: #fff;
     border-radius: 5px;
     box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.2);
+    margin: 10px 0px;
     padding: 5px 10px;
     transition: box-shadow ease-in .2s;
   }
