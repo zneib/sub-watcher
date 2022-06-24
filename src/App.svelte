@@ -76,15 +76,11 @@
     box-sizing: border-box;
   }
 
-  main {
-    display: flex;
-  }
-
   article {
     padding: 15px;
-    margin: 0 auto;
+    margin: 25px;
     background-color: #eee;
-    max-width: 400px;
+    max-width: 500px;
     border-radius: 5px;
     flex: 1;
   }
@@ -141,5 +137,19 @@
     margin: 10px 0;
   }
 
-  @media (min-width: 480px) {}
+  main {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  @media (max-width: 768px) {
+    main {
+      flex-direction: column;
+    }
+
+    article {
+      width: 90%;
+      margin-top: 25px;
+    }
+  }
 </style>
