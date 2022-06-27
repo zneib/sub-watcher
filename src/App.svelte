@@ -6,6 +6,10 @@
   let people = JSON.parse(localStorage.getItem('people')) ?? [];
   let activePlayers = JSON.parse(localStorage.getItem('activePlayers')) ?? [];
 
+  const deletePerson = (person) => {
+    people = people.filter((name) => name !== person);
+  }
+
   const addPlayer = (e) => {
     for (const field of e.target) {
       if (field?.type !== 'submit') {
@@ -29,13 +33,17 @@
     localStorage.setItem('activePlayers', JSON.stringify(activePlayers));
     localStorage.setItem('people', JSON.stringify(people));
   }
+
+  const toggleTimer = () => {
+    console.log('Time stuff');
+  }
 </script>
 
 <main>
   <article>
     <h2>Inactive Players</h2>
     {#each people as person}
-      <Person name={person} addActivePlayer={addActivePlayer} />
+      <Person name={person} addActivePlayer={addActivePlayer} deletePerson={deletePerson} />
     {/each}
     {#if showPlayersForm}
       <form on:submit|preventDefault={addPlayer}>
@@ -56,8 +64,10 @@
         </button>
       </div>
     {/if}
-
   </article>
+  <svg on:click={toggleTimer} xmlns="http://www.w3.org/2000/svg" width="80px" height="80px" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
   <article>
     <h2>Active Players</h2>
     {#each activePlayers as player}
@@ -137,9 +147,14 @@
     margin: 10px 0;
   }
 
+  svg {
+    cursor: pointer;
+  }
+
   main {
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
   }
 
   @media (max-width: 768px) {

@@ -1,9 +1,15 @@
 <script>
   export let name;
   export let removeActivePlayer;
+  let count = 0;
+
+  setInterval(() => {
+    count += 1;
+  }, 1000);
 </script>
 
 <div on:click={removeActivePlayer(name)}>
+  <span>{count}</span>
   {name}
 </div>
 
