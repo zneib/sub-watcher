@@ -71,13 +71,16 @@
   </article>
   <article>
     <h2>Active Players</h2>
-    {#each activePlayers as player}
-      <Player name={player} removeActivePlayer={removeActivePlayer} />
+    {#each activePlayers as player, index}
+      <Player index={index} name={player} removeActivePlayer={removeActivePlayer} />
     {/each}
     {#if activePlayers?.length > 1}
       <div class="center">
         <button on:click={removeAllActivePlayers}>Remove All Players</button>
       </div>
+    {/if}
+    {#if activePlayers?.length === 0}
+      <p class="message-text">No Players Selected</p>
     {/if}
   </article>
 </main>
@@ -88,7 +91,7 @@
       Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
-  * {
+  :global(*) {
     box-sizing: border-box;
   }
 
@@ -145,16 +148,17 @@
     justify-content: space-between;
   }
 
+  p.message-text {
+    font-size: 12px;
+    text-align: center;
+  }
+
   div.center {
     display: flex;
     justify-content: center;
   }
   div.center > button {
     margin: 10px 0;
-  }
-
-  svg {
-    cursor: pointer;
   }
 
   main {

@@ -20,9 +20,6 @@
 </div>
 
 <style>
-  * {
-    box-sizing: border-box;
-  }
   div.wrapper {
     display: flex;
     align-items: center;
