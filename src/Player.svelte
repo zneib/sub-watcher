@@ -22,7 +22,6 @@
 </div>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&display=swap');
   div {
     display: flex;
     justify-content: space-between;
@@ -36,9 +35,5 @@
   div:hover {
     box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.2);
     cursor: pointer;
-  }
-
-  span {
-    font-family: 'Allerta Stencil', sans-serif;
   }
 </style>
