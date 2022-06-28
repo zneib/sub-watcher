@@ -1,14 +1,23 @@
 <script>
+  import { onMount } from 'svelte';
   import Person from './Person.svelte';
   import Player from './Player.svelte';
 
+  let deleteDialog;
+  onMount(() => {
+    deleteDialog = document.getElementById('deleteDialog');
+    console.log(deleteDialog);
+  })
+
   let showPlayersForm = false;
+  let personToDelete = '';
   let people = JSON.parse(localStorage.getItem('people')) ?? [];
   let activePlayers = JSON.parse(localStorage.getItem('activePlayers')) ?? [];
 
-  const deletePerson = (person) => {
-    people = people.filter((name) => name !== person);
+  const deletePerson = () => {
+    people = people.filter((name) => name !== personToDelete);
     localStorage.setItem('people', JSON.stringify(people));
+    deleteDialog.close();
   }
 
   const addPlayer = (e) => {
@@ -19,6 +28,11 @@
        localStorage.setItem('people', JSON.stringify(people));
       }
     }
+  }
+
+  const showDialogElement = (person) => {
+    personToDelete = person;
+    deleteDialog.showModal();
   }
   
   const addActivePlayer = (player) => {
@@ -44,10 +58,19 @@
 </script>
 
 <main>
+  <dialog id="deleteDialog">
+    <form method="dialog">
+      <p>Remove <span style="font-weight: bold">{personToDelete}</span> as a player?</p>
+    </form>
+    <div class="button-wrapper">
+      <button value="cancel" on:click={deleteDialog.close()}>Cancel</button>
+      <button type="submit" value="default" on:click={deletePerson}>Confirm</button>
+    </div>
+  </dialog>
   <article>
     <h2>Inactive Players</h2>
     {#each people as person}
-      <Person name={person} addActivePlayer={addActivePlayer} deletePerson={deletePerson} />
+      <Person name={person} addActivePlayer={addActivePlayer} showDialogElement={showDialogElement} />
     {/each}
     {#if showPlayersForm}
       <form on:submit|preventDefault={addPlayer}>
@@ -102,6 +125,15 @@
     max-width: 500px;
     border-radius: 5px;
     flex: 1;
+  }
+
+  dialog {
+    border: none;
+    border-radius: 5px;
+  }
+
+  dialog::backdrop {
+    background-color: rgba(0,0,0,0.2);
   }
 
   h2 {
