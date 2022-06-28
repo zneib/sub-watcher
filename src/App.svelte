@@ -35,8 +35,11 @@
     localStorage.setItem('people', JSON.stringify(people));
   }
 
-  const toggleTimer = () => {
-    console.log('Time stuff');
+  const removeAllActivePlayers = () => {
+    people = [people, ...activePlayers].flat();
+    activePlayers = [];
+    localStorage.removeItem('activePlayers');
+    localStorage.setItem('people', JSON.stringify(people));
   }
 </script>
 
@@ -66,14 +69,16 @@
       </div>
     {/if}
   </article>
-  <svg on:click={toggleTimer} xmlns="http://www.w3.org/2000/svg" width="80px" height="80px" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-  </svg>
   <article>
     <h2>Active Players</h2>
     {#each activePlayers as player}
       <Player name={player} removeActivePlayer={removeActivePlayer} />
     {/each}
+    {#if activePlayers?.length > 1}
+      <div class="center">
+        <button on:click={removeAllActivePlayers}>Remove All Players</button>
+      </div>
+    {/if}
   </article>
 </main>
 
