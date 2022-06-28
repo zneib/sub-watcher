@@ -133,6 +133,7 @@
 
   button {
     color: black;
+    font-weight: normal;
     background-color: #fff;
     cursor: pointer;
     border-radius: 5px;
