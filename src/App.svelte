@@ -8,6 +8,7 @@
 
   const deletePerson = (person) => {
     people = people.filter((name) => name !== person);
+    localStorage.setItem('people', JSON.stringify(people));
   }
 
   const addPlayer = (e) => {
