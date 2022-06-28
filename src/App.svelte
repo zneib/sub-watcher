@@ -132,6 +132,7 @@
   }
 
   button {
+    color: black;
     background-color: #fff;
     cursor: pointer;
     border-radius: 5px;
