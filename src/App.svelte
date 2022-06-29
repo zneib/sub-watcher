@@ -75,7 +75,7 @@
       {/each}
     </div>
     {#if showPlayersForm}
-      <form on:submit|preventDefault={addPlayer}>
+      <form class="add-player-form" on:submit|preventDefault={addPlayer}>
         <div>
           <label for="firstName">Name</label>
           <input type="text" name="firstName">
@@ -171,10 +171,13 @@
 
   form {
     background: #fff;
-    border: 2px solid #ccc;
     border-radius: 5px;
     padding: 10px;
     width: 90%;
+  }
+
+  form.add-player-form {
+    border: 2px solid #ccc;
     position: absolute;
     right: 0;
     left: 0;
