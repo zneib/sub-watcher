@@ -67,11 +67,13 @@
       <button type="submit" value="default" on:click={deletePerson}>Confirm</button>
     </div>
   </dialog>
-  <article>
+  <article class="inactive">
     <h2>Inactive Players</h2>
-    {#each people as person}
-      <Person name={person} addActivePlayer={addActivePlayer} showDialogElement={showDialogElement} />
-    {/each}
+    <div class="person-container">
+      {#each people as person}
+        <Person name={person} addActivePlayer={addActivePlayer} showDialogElement={showDialogElement} />
+      {/each}
+    </div>
     {#if showPlayersForm}
       <form on:submit|preventDefault={addPlayer}>
         <div>
@@ -85,11 +87,9 @@
       </form>
     {/if}
     {#if !showPlayersForm}
-      <div class="center">
-        <button on:click={() => showPlayersForm = true}>
-          Add Player
-        </button>
-      </div>
+      <button class="add" on:click={() => showPlayersForm = true}>
+        Add Player
+      </button>
     {/if}
   </article>
   <article>
@@ -129,11 +129,29 @@
   }
 
   article {
-    padding: 15px;
+    padding: 15px 15px 30px;
     margin: 25px;
     max-width: 500px;
     border-radius: 5px;
     flex: 1;
+  }
+
+  div.person-container {
+    max-height: 350px;
+    overflow-y: auto;
+  }
+
+  article.inactive {
+    position: relative;
+  }
+
+  .add {
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: -15px;
+    margin: auto;
+    z-index: 1;
   }
 
   dialog {
@@ -152,9 +170,16 @@
 
   form {
     background: #fff;
+    border: 2px solid #ccc;
     border-radius: 5px;
     padding: 10px;
-    width: 100%;
+    width: 90%;
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: -95px;
+    margin: auto;
+    z-index: 1;
   }
 
   label {
