@@ -109,7 +109,17 @@
 </main>
 
 <style>
-  :root {
+  :global(:root) {
+    --grey-one: #102A43;
+    --grey-two: #243B53;
+    --grey-three: #334E68;
+    --grey-four: #486581;
+    --grey-five: #627D98;
+    --grey-six: #829AB1;
+    --grey-seven: #9FB3C8;
+    --grey-eight: #BCCCDC;
+    --grey-nine: #D9E2EC;
+    --grey-ten: #F0F4F8;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
       Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
@@ -121,7 +131,6 @@
   article {
     padding: 15px;
     margin: 25px;
-    background-color: #eee;
     max-width: 500px;
     border-radius: 5px;
     flex: 1;
@@ -209,6 +218,49 @@
     article {
       width: 90%;
       margin-top: 25px;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(body) {
+      background-color: var(--grey-one);
+    }
+    article {
+      background-color: var(--grey-three);
+    }
+
+    h2 {
+      color: var(--grey-nine);
+    }
+
+    p.message-text {
+      color: var(--grey-nine);
+    }
+
+    button {
+      color: var(--grey-nine);
+      background-color: var(--grey-four);
+      border: 2px solid var(--grey-six);
+    }
+    form {
+      background-color: var(--grey-four);
+    }
+
+    label {
+      color: var(--grey-nine);
+    }
+
+    input {
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+      padding: 5px 10px;
+      width: 100%;
+    }
+  }
+  @media (prefers-color-scheme: light) {
+    article {
+      background-color: #eee;
     }
   }
 </style>

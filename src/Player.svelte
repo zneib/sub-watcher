@@ -55,4 +55,11 @@
     left: -35px;
     margin: auto;
   }
+
+  @media (prefers-color-scheme: dark) {
+    div.name {
+      color: var(--grey-nine);
+      background-color: var(--grey-four);
+    }
+  }
 </style>

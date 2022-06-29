@@ -34,4 +34,15 @@
   svg {
     cursor: pointer;
   }
+
+  @media (prefers-color-scheme: dark) {
+    div.wrapper {
+      color: var(--grey-nine);
+      background-color: var(--grey-four);
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+
+  }
 </style>
