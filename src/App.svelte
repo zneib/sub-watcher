@@ -137,7 +137,7 @@
   }
 
   dialog {
-    border: none;
+    border: 2px solid rgb(175, 175, 175);
     border-radius: 5px;
   }
 
@@ -227,6 +227,16 @@
     }
     article {
       background-color: var(--grey-three);
+    }
+
+    dialog {
+      color: var(--grey-nine);
+      background-color: var(--grey-four);
+      border: 2px solid var(--grey-six);
+    }
+
+    dialog::backdrop {
+      background-color: rgba(0,0,0,0.4);
     }
 
     h2 {
