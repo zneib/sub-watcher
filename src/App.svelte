@@ -146,6 +146,7 @@
   }
 
   .add {
+    width: 150px;
     position: absolute;
     right: 0;
     left: 0;
