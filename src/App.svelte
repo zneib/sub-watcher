@@ -244,6 +244,10 @@
       flex-direction: column;
     }
 
+    dialog {
+      width: 90%;
+    }
+
     article {
       width: 90%;
       margin-top: 25px;
