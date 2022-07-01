@@ -94,6 +94,12 @@
   </article>
   <article>
     <h2>Active Players</h2>
+    {#if activePlayers?.length > 0}
+      <div class="labels">
+        <span>Name</span>
+        <span>MM:SS</span>
+      </div>
+    {/if}
     {#each activePlayers as player, index}
       <Player index={index} name={player} removeActivePlayer={removeActivePlayer} />
     {/each}
@@ -143,6 +149,18 @@
 
   article.inactive {
     position: relative;
+  }
+
+  div.labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+  }
+  div.labels > span:nth-child(1) {
+    margin-left: 40px;
+  }
+  div.labels > span:nth-child(2) {
+    margin-right: 10px;
   }
 
   .add {
@@ -260,6 +278,10 @@
     }
     article {
       background-color: var(--grey-three);
+    }
+
+    div.labels {
+      color: var(--grey-eight);
     }
 
     dialog {
