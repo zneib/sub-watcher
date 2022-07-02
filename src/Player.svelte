@@ -1,24 +1,34 @@
 <script>
+  import { afterUpdate } from "svelte";
   export let index;
   export let name;
   export let removeActivePlayer;
-  let count = 0;
-  let minutes = 0
+  let seconds = 0;
+  let minutes = 0;
+  let timesUp = false;
 
-  setInterval(() => {
-    if (count === 59) {
+  const timerTracker = setInterval(() => {
+    if (seconds === 59) {
       minutes += 1;
-      count = 0;
+      seconds = 0;
     } else {
-      count += 1;
+      seconds += 1;
     }
   }, 1000);
 
-  $: timer = `${minutes < 10 ? `0${minutes}` : minutes}:${count < 10 ? `0${count}` : count}`;
+  $: timer = `${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
+
+  afterUpdate(() => {
+    // Prevent the timer from going forever.
+    if (timer === '99:99') {
+      clearInterval(timerTracker);
+      timesUp = true;
+    }
+  });
 </script>
 
-<div class="name" on:click={removeActivePlayer(name)}>
-  <span class="index">{index + 1}</span>
+<div class:danger={timesUp} class="name" on:click={removeActivePlayer(name)}>
+  <span class:danger={timesUp} class="index">{index + 1}</span>
   <span class="name">{name}</span>
   <span class="timer">{timer}</span>
 </div>
@@ -54,6 +64,14 @@
     bottom: 0;
     left: -35px;
     margin: auto;
+  }
+
+  div.danger {
+    border: 2px solid var(--danger)
+  }
+
+  span.danger {
+    color: var(--danger);
   }
 
   @media (prefers-color-scheme: dark) {

@@ -116,6 +116,7 @@
 
 <style>
   :global(:root) {
+    --danger: #d64545;
     --grey-one: #102A43;
     --grey-two: #243B53;
     --grey-three: #334E68;
@@ -145,6 +146,7 @@
   div.person-container {
     max-height: 350px;
     overflow-y: auto;
+    padding-right: 5px;
   }
 
   article.inactive {
