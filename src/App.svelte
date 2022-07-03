@@ -69,7 +69,7 @@
   </dialog>
   <article>
     <h2>Inactive Players</h2>
-    <Helper text="Inactive Players Features" />
+    <Helper text="inactive" title="Inactive Players" />
     <div class="person-container">
       {#each people as person}
         <Person name={person} addActivePlayer={addActivePlayer} showDialogElement={showDialogElement} />
@@ -95,7 +95,7 @@
   </article>
   <article>
     <h2>Active Players</h2>
-    <Helper text="Active Players Features" />
+    <Helper text="active" title="Active Players" />
     {#if activePlayers?.length > 0}
       <div class="labels">
         <span>Name</span>
