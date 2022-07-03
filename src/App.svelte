@@ -2,11 +2,11 @@
   import { onMount } from 'svelte';
   import Person from './Person.svelte';
   import Player from './Player.svelte';
+  import Helper from './Helper.svelte';
 
   let deleteDialog;
   onMount(() => {
     deleteDialog = document.getElementById('deleteDialog');
-    console.log(deleteDialog);
   })
 
   let showPlayersForm = false;
@@ -69,6 +69,7 @@
   </dialog>
   <article class="inactive">
     <h2>Inactive Players</h2>
+    <Helper />
     <div class="person-container">
       {#each people as person}
         <Person name={person} addActivePlayer={addActivePlayer} showDialogElement={showDialogElement} />
