@@ -41,8 +41,4 @@
       background-color: var(--grey-four);
     }
   }
-
-  @media (prefers-color-scheme: light) {
-
-  }
 </style>

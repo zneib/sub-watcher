@@ -67,9 +67,9 @@
       <button type="submit" value="default" on:click={deletePerson}>Confirm</button>
     </div>
   </dialog>
-  <article class="inactive">
+  <article>
     <h2>Inactive Players</h2>
-    <Helper />
+    <Helper text="Inactive Players Features" />
     <div class="person-container">
       {#each people as person}
         <Person name={person} addActivePlayer={addActivePlayer} showDialogElement={showDialogElement} />
@@ -95,6 +95,7 @@
   </article>
   <article>
     <h2>Active Players</h2>
+    <Helper text="Active Players Features" />
     {#if activePlayers?.length > 0}
       <div class="labels">
         <span>Name</span>
@@ -137,6 +138,7 @@
   }
 
   article {
+    position: relative;
     padding: 15px 15px 30px;
     margin: 25px;
     max-width: 500px;
@@ -148,10 +150,6 @@
     max-height: 350px;
     overflow-y: auto;
     padding-right: 5px;
-  }
-
-  article.inactive {
-    position: relative;
   }
 
   div.labels {

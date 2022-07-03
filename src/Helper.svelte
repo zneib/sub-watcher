@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  export let text;
 
   let helperDialog;
   onMount(() => {
@@ -8,6 +9,7 @@
 </script>
 
 <dialog id="helperDialog">
+  <h2>{text}</h2>
   <form method="dialog">
     <p>Remove as a player?</p>
   </form>
@@ -36,6 +38,22 @@
   @media (prefers-color-scheme: dark) {
     svg {
       color: var(--grey-nine);
+    }
+
+    dialog {
+      color: var(--grey-nine);
+      background-color: var(--grey-four);
+      border: 2px solid var(--grey-six);
+    }
+
+    dialog::backdrop {
+      background-color: rgba(0,0,0,0.4);
+    }
+
+    button {
+      color: var(--grey-nine);
+      background-color: var(--grey-four);
+      border: 2px solid var(--grey-six);
     }
   }
 </style>
