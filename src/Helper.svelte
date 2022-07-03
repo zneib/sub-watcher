@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   export let text;
   export let title;
+  export let features;
 
   let helperDialog;
   onMount(() => {
@@ -13,7 +14,11 @@
   <dialog id={`${text}Dialog`}>
     <h2>{title}</h2>
     <form method="dialog">
-      <p>Do Stuff</p>
+      <ul>
+        {#each features as feature}
+          <li>{feature}</li>
+        {/each}
+      </ul>
     </form>
     <div class="button-wrapper">
       <button value="cancel" on:click={helperDialog.close()}>Close</button>

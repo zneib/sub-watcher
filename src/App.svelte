@@ -4,6 +4,19 @@
   import Player from './Player.svelte';
   import Helper from './Helper.svelte';
 
+  let helperFeaturesOne = [
+    'Add new players by clicking on the "Add Player" button.',
+    'Clicking on a player name will add them to the "Active Player" list.',
+    'Clicking on the "X" will ask you to confirm you want to remove that player.'
+  ]
+
+  let helperFeaturesTwo = [
+    "Players will start their time as soon as they're added to the list.",
+    "Players will reach their max playing time as set by you in the form below.",
+    "Players can be sent back to the inactive list by clicking on their name",
+    "All players can be sent back to the inactive list by clicking on the Remove All Players button"
+  ]
+
   let deleteDialog;
   onMount(() => {
     deleteDialog = document.getElementById('deleteDialog');
@@ -69,7 +82,7 @@
   </dialog>
   <article>
     <h2>Inactive Players</h2>
-    <Helper text="inactive" title="Inactive Players" />
+    <Helper text="inactive" title="Inactive Players Features" features={helperFeaturesOne} />
     <div class="person-container">
       {#each people as person}
         <Person name={person} addActivePlayer={addActivePlayer} showDialogElement={showDialogElement} />
@@ -95,7 +108,7 @@
   </article>
   <article>
     <h2>Active Players</h2>
-    <Helper text="active" title="Active Players" />
+    <Helper text="active" title="Active Players Features" features={helperFeaturesTwo} />
     {#if activePlayers?.length > 0}
       <div class="labels">
         <span>Name</span>
