@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import Person from './Person.svelte';
   import Player from './Player.svelte';
+  import Collapse from './Collapse.svelte';
   import Helper from './Helper.svelte';
 
   let helperFeaturesOne = [
@@ -16,6 +17,9 @@
     "Players can be sent back to the inactive list by clicking on their name",
     "All players can be sent back to the inactive list by clicking on the Remove All Players button"
   ]
+
+  let isInactiveOpen = true;
+  let isActiveOpen = true;
 
   let deleteDialog;
   onMount(() => {
@@ -81,9 +85,10 @@
     </div>
   </dialog>
   <article>
+    <Collapse onChange={value => isInactiveOpen = value} />
     <h2>Inactive Players</h2>
     <Helper text="inactive" title="Inactive Players Features" features={helperFeaturesOne} />
-    <div class="person-container">
+    <div class:collapsed={!isInactiveOpen} class="person-container">
       {#each people as person}
         <Person name={person} addActivePlayer={addActivePlayer} showDialogElement={showDialogElement} />
       {/each}
@@ -107,18 +112,23 @@
     {/if}
   </article>
   <article>
+    {#if activePlayers?.length > 0}
+      <Collapse onChange={value => isActiveOpen = value} />
+    {/if}
     <h2>Active Players</h2>
     <Helper text="active" title="Active Players Features" features={helperFeaturesTwo} />
-    {#if activePlayers?.length > 0}
+    {#if activePlayers?.length > 0 && isActiveOpen}
       <div class="labels">
         <span>Name</span>
         <span>MM:SS</span>
       </div>
     {/if}
-    {#each activePlayers as player, index}
-      <Player index={index} name={player} removeActivePlayer={removeActivePlayer} />
-    {/each}
-    {#if activePlayers?.length > 1}
+    <div class:collapsed={!isActiveOpen}>
+      {#each activePlayers as player, index}
+        <Player index={index} name={player} removeActivePlayer={removeActivePlayer} />
+      {/each}
+    </div>
+    {#if activePlayers?.length > 1 && isActiveOpen}
       <div class="center">
         <button on:click={removeAllActivePlayers}>Remove All Players</button>
       </div>
@@ -157,6 +167,10 @@
     max-width: 500px;
     border-radius: 5px;
     flex: 1;
+  }
+
+  div.collapsed {
+    display: none;
   }
 
   div.person-container {
