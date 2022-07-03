@@ -27,4 +27,9 @@
     width: 20px;
     height: 20px;
   }
+  @media (prefers-color-scheme: dark) {
+    svg {
+      color: var(--grey-nine);
+    }
+  }
 </style>

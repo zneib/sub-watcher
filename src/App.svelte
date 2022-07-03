@@ -21,11 +21,14 @@
   let isInactiveOpen = true;
   let isActiveOpen = true;
 
+  let maxActivePlayers = 7;
+
   let deleteDialog;
   onMount(() => {
     deleteDialog = document.getElementById('deleteDialog');
   })
 
+  let showOptionsForm = false;
   let showPlayersForm = false;
   let personToDelete = '';
   let people = JSON.parse(localStorage.getItem('people')) ?? [];
@@ -93,7 +96,47 @@
         <Person name={person} addActivePlayer={addActivePlayer} showDialogElement={showDialogElement} />
       {/each}
     </div>
-    {#if showPlayersForm}
+    {#if showOptionsForm && !showPlayersForm}
+      <form class="options-form" on:submit|preventDefault={addPlayer}>
+        <div>
+          <label for="activePlayerLimit">Active Players Limit</label>
+          <select name="activePlayerLimit">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7" selected>7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+        <div>
+          <label for="playTimeLimit">Player Time Limit - MM:SS</label>
+          <select name="playTimeLimit">
+            <option value="01:00">01:00</option>
+            <option value="03:00">03:00</option>
+            <option value="05:00" selected>05:00</option>
+            <option value="10:00">10:00</option>
+            <option value="15:00">15:00</option>
+            <option value="20:00">20:00</option>
+            <option value="25:00">25:00</option>
+            <option value="30:00">30:00</option>
+          </select>
+        </div>
+        <div class="button-wrapper">
+          <button on:click={() => showOptionsForm = false}>Close</button>
+        </div>
+      </form>
+    {/if}
+    {#if !showOptionsForm}
+      <button class="options" on:click={() => showOptionsForm = true}>
+        Options
+      </button>
+    {/if}
+    {#if showPlayersForm && !showOptionsForm}
       <form class="add-player-form" on:submit|preventDefault={addPlayer}>
         <div>
           <label for="firstName">Name</label>
@@ -191,14 +234,28 @@
     margin-right: 10px;
   }
 
-  .add {
-    width: 150px;
+  select {
+    width: 100%;
+    background: #fff;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-bottom: 15px;
+  }
+
+  .options {
+    width: 100px;
     position: absolute;
-    right: 0;
-    left: 0;
+    left: 35px;
+    bottom: -15px;
+  }
+
+  .add {
+    width: 100px;
+    position: absolute;
+    right: 35px;
     bottom: -15px;
     margin: auto;
-    z-index: 1;
   }
 
   dialog {
@@ -222,14 +279,21 @@
     width: 90%;
   }
 
-  form.add-player-form {
+  form.add-player-form, form.options-form {
     border: 2px solid #ccc;
     position: absolute;
     right: 0;
     left: 0;
-    bottom: -95px;
     margin: auto;
     z-index: 1;
+  }
+
+  form.add-player-form {
+    bottom: -95px;
+  }
+
+  form.options-form {
+    bottom: -155px;
   }
 
   label {
@@ -320,6 +384,12 @@
 
     dialog::backdrop {
       background-color: rgba(0,0,0,0.4);
+    }
+
+    select {
+      border: 2px solid var(--grey-six);
+      color: var(--grey-nine);
+      background-color: var(--grey-four);
     }
 
     h2 {
