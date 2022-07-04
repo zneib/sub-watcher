@@ -8,9 +8,16 @@
   onMount(() => {
     helperDialog = document.getElementById(`${text}Dialog`);
   })
+
+  const handleClickOutside = (event) => {
+    console.log(event.target.nodeName);
+    if (event.target.nodeName === "DIALOG") {
+      helperDialog.close();
+    }
+  }
 </script>
 
-<div>
+<div on:click={handleClickOutside}>
   <dialog id={`${text}Dialog`}>
     <h2>{title}</h2>
     <form method="dialog">
