@@ -172,9 +172,7 @@
       {/each}
     </div>
     {#if activePlayers?.length > 1 && isActiveOpen}
-      <div class="center">
-        <button on:click={removeAllActivePlayers}>Remove All Players</button>
-      </div>
+      <button class="remove-all" on:click={removeAllActivePlayers}>Remove All Players</button>
     {/if}
     {#if activePlayers?.length === 0}
       <p class="message-text">No Players Selected</p>
@@ -217,7 +215,7 @@
   }
 
   div.person-container {
-    max-height: 350px;
+    max-height: 250px;
     overflow-y: auto;
     padding-right: 5px;
   }
@@ -254,6 +252,14 @@
     width: 100px;
     position: absolute;
     right: 35px;
+    bottom: -15px;
+    margin: auto;
+  }
+  
+  .remove-all {
+    position: absolute;
+    right: 0;
+    left: 0;
     bottom: -15px;
     margin: auto;
   }
