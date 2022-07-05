@@ -3,9 +3,11 @@
   export let index;
   export let name;
   export let removeActivePlayer;
+  export let playTimeLimit;
   let seconds = 0;
   let minutes = 0;
   let timesUp = false;
+  $: maxPlayers = 0;
 
   const timerTracker = setInterval(() => {
     if (seconds === 59) {
@@ -19,8 +21,12 @@
   $: timer = `${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
 
   afterUpdate(() => {
+    if (+timer.replace(':', '') > +playTimeLimit.replace(':', '')) {
+      clearInterval(timerTracker);
+      timesUp = true;
+    }
     // Prevent the timer from going forever.
-    if (timer === '99:99') {
+    if (timer === playTimeLimit) {
       clearInterval(timerTracker);
       timesUp = true;
     }

@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import { writable } from 'svelte/store';
   import Person from './Person.svelte';
   import Player from './Player.svelte';
   import Collapse from './Collapse.svelte';
@@ -22,6 +23,7 @@
   let isActiveOpen = true;
 
   let maxActivePlayers = 7;
+  let playTimeLimit = '05:00';
 
   let deleteDialog;
   onMount(() => {
@@ -100,7 +102,7 @@
       <form class="options-form" on:submit|preventDefault={addPlayer}>
         <div>
           <label for="activePlayerLimit">Active Players Limit</label>
-          <select name="activePlayerLimit">
+          <select name="activePlayerLimit" bind:value={maxActivePlayers}>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -115,7 +117,7 @@
         </div>
         <div>
           <label for="playTimeLimit">Player Time Limit - MM:SS</label>
-          <select name="playTimeLimit">
+          <select name="playTimeLimit" bind:value={playTimeLimit}>
             <option value="01:00">01:00</option>
             <option value="03:00">03:00</option>
             <option value="05:00" selected>05:00</option>
@@ -162,13 +164,13 @@
     <Helper text="active" title="Active Players Features" features={helperFeaturesTwo} />
     {#if activePlayers?.length > 0 && isActiveOpen}
       <div class="labels">
-        <span>Name</span>
-        <span>MM:SS</span>
+        <span>Name ({maxActivePlayers})</span>
+        <span>({playTimeLimit}) MM:SS</span>
       </div>
     {/if}
     <div class:collapsed={!isActiveOpen}>
       {#each activePlayers as player, index}
-        <Player index={index} name={player} removeActivePlayer={removeActivePlayer} />
+        <Player index={index} name={player} removeActivePlayer={removeActivePlayer} playTimeLimit={playTimeLimit} />
       {/each}
     </div>
     {#if activePlayers?.length > 1 && isActiveOpen}
@@ -215,7 +217,7 @@
   }
 
   div.person-container {
-    max-height: 250px;
+    max-height: 220px;
     overflow-y: auto;
     padding-right: 5px;
   }
@@ -230,6 +232,23 @@
   }
   div.labels > span:nth-child(2) {
     margin-right: 10px;
+  }
+
+  div.limits {
+    font-size: 12px;
+    margin-bottom: 0;
+  }
+  div.limits > p {
+    margin: 5px auto;
+  }
+  div.limits > p.lg-text {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  div.options-wrapper {
+    display: flex;
+    justify-content: space-between;
   }
 
   select {
@@ -257,6 +276,7 @@
   }
   
   .remove-all {
+    width: 150px;
     position: absolute;
     right: 0;
     left: 0;
@@ -341,14 +361,6 @@
     text-align: center;
   }
 
-  div.center {
-    display: flex;
-    justify-content: center;
-  }
-  div.center > button {
-    margin: 10px 0;
-  }
-
   main {
     display: flex;
     justify-content: space-evenly;
@@ -403,6 +415,10 @@
     }
 
     p.message-text {
+      color: var(--grey-nine);
+    }
+
+    div.limits {
       color: var(--grey-nine);
     }
 
