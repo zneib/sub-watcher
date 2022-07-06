@@ -36,6 +36,8 @@
   let people = JSON.parse(localStorage.getItem('people')) ?? [];
   let activePlayers = JSON.parse(localStorage.getItem('activePlayers')) ?? [];
 
+  $: showMaxLimitMessage = maxActivePlayers - activePlayers?.length === 0;
+
   const deletePerson = () => {
     people = people.filter((name) => name !== personToDelete);
     localStorage.setItem('people', JSON.stringify(people));
@@ -100,7 +102,8 @@
           addActivePlayer={addActivePlayer} 
           showDialogElement={showDialogElement} 
           maxActivePlayers={maxActivePlayers} 
-          activePlayers={activePlayers?.length} 
+          activePlayers={activePlayers?.length}
+          limitMessageShowing={showMaxLimitMessage}
         />
       {/each}
     </div>
@@ -156,6 +159,9 @@
         </div>
       </form>
     {/if}
+    {#if showMaxLimitMessage}
+      <p style="text-align: center; font-size: 12px; margin: 2px auto">Active Player Limit Reached</p>
+    {/if}
     {#if !showPlayersForm}
       <button class="add" on:click={() => showPlayersForm = true}>
         Add Player
@@ -170,7 +176,7 @@
     <Helper text="active" title="Active Players Features" features={helperFeaturesTwo} />
     {#if activePlayers?.length > 0 && isActiveOpen}
       <div class="labels">
-        <span>Name ({maxActivePlayers - activePlayers.length})</span>
+        <span>Name</span>
         <span>({playTimeLimit}) MM:SS</span>
       </div>
     {/if}
@@ -179,6 +185,11 @@
         <Player index={index} name={player} removeActivePlayer={removeActivePlayer} playTimeLimit={playTimeLimit} />
       {/each}
     </div>
+    {#if maxActivePlayers - activePlayers?.length !== 0}
+      <p style="text-align: center; font-size: 12px; margin: 2px auto">
+        <span style="font-weight: bold">{maxActivePlayers - activePlayers?.length}</span> spots open
+      </p>
+    {/if}
     {#if activePlayers?.length > 1 && isActiveOpen}
       <button class="remove-all" on:click={removeAllActivePlayers}>Remove All Players</button>
     {/if}
@@ -238,23 +249,6 @@
   }
   div.labels > span:nth-child(2) {
     margin-right: 10px;
-  }
-
-  div.limits {
-    font-size: 12px;
-    margin-bottom: 0;
-  }
-  div.limits > p {
-    margin: 5px auto;
-  }
-  div.limits > p.lg-text {
-    font-size: 16px;
-    text-align: center;
-  }
-
-  div.options-wrapper {
-    display: flex;
-    justify-content: space-between;
   }
 
   select {
