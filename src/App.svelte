@@ -160,7 +160,7 @@
       </form>
     {/if}
     {#if showMaxLimitMessage}
-      <p style="text-align: center; font-size: 12px; margin: 2px auto">Active Player Limit Reached</p>
+      <p class="limit-message">Active Player Limit Reached</p>
     {/if}
     {#if !showPlayersForm}
       <button class="add" on:click={() => showPlayersForm = true}>
@@ -186,8 +186,8 @@
       {/each}
     </div>
     {#if maxActivePlayers - activePlayers?.length !== 0}
-      <p style="text-align: center; font-size: 12px; margin: 2px auto">
-        <span style="font-weight: bold">{maxActivePlayers - activePlayers?.length}</span> spots open
+      <p class="limit-message">
+        <span>{maxActivePlayers - activePlayers?.length}</span> spots open
       </p>
     {/if}
     {#if activePlayers?.length > 1 && isActiveOpen}
@@ -273,6 +273,16 @@
     right: 35px;
     bottom: -15px;
     margin: auto;
+  }
+
+  p.limit-message {
+    text-align: center; 
+    font-size: 12px; 
+    margin: 2px auto
+  }
+
+  p.limit-message > span {
+    font-weight: bold;
   }
   
   .remove-all {
@@ -402,6 +412,10 @@
 
     dialog::backdrop {
       background-color: rgba(0,0,0,0.4);
+    }
+
+    p.limit-message {
+      color: var(--grey-nine);
     }
 
     select {
