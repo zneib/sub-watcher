@@ -2,10 +2,20 @@
   export let name;
   export let addActivePlayer;
   export let showDialogElement;
+  export let maxActivePlayers;
+  export let activePlayers;
   let showConfirmation = false;
+
+  const handleClick = (name) => {
+    if (maxActivePlayers - activePlayers !== 0) {
+      addActivePlayer(name)
+    } else {
+      return;
+    }
+  }
 </script>
 
-<div class="wrapper" on:click={addActivePlayer(name)}>
+<div class="wrapper" on:click={() => handleClick(name)}>
   {name}
   {#if !showConfirmation}
     <svg xmlns="http://www.w3.org/2000/svg" on:click={(e) => {showDialogElement(name); e.stopPropagation()}} width="15px" height="15px" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

@@ -95,7 +95,13 @@
     <Helper text="inactive" title="Inactive Players Features" features={helperFeaturesOne} />
     <div class:collapsed={!isInactiveOpen} class="person-container">
       {#each people as person}
-        <Person name={person} addActivePlayer={addActivePlayer} showDialogElement={showDialogElement} />
+        <Person 
+          name={person} 
+          addActivePlayer={addActivePlayer} 
+          showDialogElement={showDialogElement} 
+          maxActivePlayers={maxActivePlayers} 
+          activePlayers={activePlayers?.length} 
+        />
       {/each}
     </div>
     {#if showOptionsForm && !showPlayersForm}
@@ -164,7 +170,7 @@
     <Helper text="active" title="Active Players Features" features={helperFeaturesTwo} />
     {#if activePlayers?.length > 0 && isActiveOpen}
       <div class="labels">
-        <span>Name ({maxActivePlayers})</span>
+        <span>Name ({maxActivePlayers - activePlayers.length})</span>
         <span>({playTimeLimit}) MM:SS</span>
       </div>
     {/if}
