@@ -8,15 +8,19 @@
 
   let helperFeaturesOne = [
     'Add new players by clicking on the "Add Player" button.',
+    'Configure the max active player limit and play time limits by clicking the Options button.',
     'Clicking on a player name will add them to the "Active Player" list.',
-    'Clicking on the "X" will ask you to confirm you want to remove that player.'
+    'Clicking on the "X" will ask you to confirm you want to remove that player.',
+    'Collapse and expland the card by clicking on the top left plus and minus buttons.'
   ]
 
   let helperFeaturesTwo = [
     "Players will start their time as soon as they're added to the list.",
-    "Players will reach their max playing time as set by you in the form below.",
-    "Players can be sent back to the inactive list by clicking on their name",
-    "All players can be sent back to the inactive list by clicking on the Remove All Players button"
+    "Players will reach their max playing time as set by you in Options.",
+    "Players who reach their max playing time will turn red and their time will end.",
+    "Players can be sent back to the inactive list by clicking on their name.",
+    "All players can be sent back to the inactive list by clicking on the Remove All Players button.",
+    'Collapse and expland the card by clicking on the top left plus and minus buttons.'
   ]
 
   let isInactiveOpen = true;

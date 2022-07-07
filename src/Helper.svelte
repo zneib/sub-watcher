@@ -10,7 +10,6 @@
   })
 
   const handleClickOutside = (event) => {
-    console.log(event.target.nodeName);
     if (event.target.nodeName === "DIALOG") {
       helperDialog.close();
     }
@@ -44,6 +43,18 @@
 </div>
 
 <style>
+  button {
+    color: black;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    padding: 5px 10px;
+    transition: border .2s ease-in;
+  }
+  button:hover {
+    border: 2px solid rgb(129, 129, 129);
+  }
   svg {
     cursor: pointer;
     position: absolute;
