@@ -1,6 +1,5 @@
 <script>
   import { onMount } from 'svelte';
-  import { writable } from 'svelte/store';
   import Person from './Person.svelte';
   import Player from './Player.svelte';
   import Collapse from './Collapse.svelte';
@@ -30,12 +29,14 @@
   let playTimeLimit = '05:00';
 
   let deleteDialog;
+  let addPlayerDialog;
+  let optionsDialog;
   onMount(() => {
     deleteDialog = document.getElementById('deleteDialog');
+    addPlayerDialog = document.getElementById('addPlayerDialog');
+    optionsDialog = document.getElementById('optionsDialog');
   })
 
-  let showOptionsForm = false;
-  let showPlayersForm = false;
   let personToDelete = '';
   let people = JSON.parse(localStorage.getItem('people')) ?? [];
   let activePlayers = JSON.parse(localStorage.getItem('activePlayers')) ?? [];
@@ -84,15 +85,15 @@
     localStorage.setItem('people', JSON.stringify(people));
   }
 
-  const handleClickOutside = (event) => {
+  const handleClickOutside = (event, dialog) => {
     if (event.target.nodeName === "DIALOG") {
-      deleteDialog.close();
+      dialog.close();
     }
   }
 </script>
 
 <main>
-  <dialog id="deleteDialog" on:click={handleClickOutside}>
+  <dialog id="deleteDialog" on:click={(e) => handleClickOutside(e, deleteDialog)}>
     <div class="wrapper">
       <form method="dialog">
         <p>Remove <span style="font-weight: bold">{personToDelete}</span> as a player?</p>
@@ -103,24 +104,23 @@
       </div>
     </div>
   </dialog>
-  <article>
-    <Collapse onChange={value => isInactiveOpen = value} />
-    <h2>Inactive Players</h2>
-    <Helper text="inactive" title="Inactive Players Features" features={helperFeaturesOne} />
-    <div class:collapsed={!isInactiveOpen} class="person-container">
-      {#each people as person}
-        <Person 
-          name={person} 
-          addActivePlayer={addActivePlayer} 
-          showDialogElement={showDialogElement} 
-          maxActivePlayers={maxActivePlayers} 
-          activePlayers={activePlayers?.length}
-          limitMessageShowing={showMaxLimitMessage}
-        />
-      {/each}
+  <dialog id="addPlayerDialog" on:click={(e) => handleClickOutside(e, addPlayerDialog)}>
+    <div class="wrapper">
+      <form on:submit|preventDefault={addPlayer}>
+        <div>
+          <label for="firstName">Name</label>
+          <input type="text" name="firstName">
+        </div>
+        <div class="button-wrapper">
+          <button type="submit">Add</button>
+          <button value="cancel" on:click={addPlayerDialog.close()}>Close</button>
+        </div>
+      </form>
     </div>
-    {#if showOptionsForm && !showPlayersForm}
-      <form class="options-form" on:submit|preventDefault={addPlayer}>
+  </dialog>
+  <dialog id="optionsDialog" on:click={(e) => handleClickOutside(e, optionsDialog)}>
+    <div class="wrapper">
+      <form on:submit|preventDefault={addPlayer}>
         <div>
           <label for="activePlayerLimit">Active Players Limit</label>
           <select name="activePlayerLimit" bind:value={maxActivePlayers}>
@@ -150,35 +150,36 @@
           </select>
         </div>
         <div class="button-wrapper">
-          <button on:click={() => showOptionsForm = false}>Close</button>
+          <button on:click={optionsDialog.close()}>Close</button>
         </div>
       </form>
-    {/if}
-    {#if !showOptionsForm}
-      <button class="options" on:click={() => showOptionsForm = true}>
-        Options
-      </button>
-    {/if}
-    {#if showPlayersForm && !showOptionsForm}
-      <form class="add-player-form" on:submit|preventDefault={addPlayer}>
-        <div>
-          <label for="firstName">Name</label>
-          <input type="text" name="firstName">
-        </div>
-        <div class="button-wrapper">
-          <button type="submit">Add</button>
-          <button on:click={() => showPlayersForm = false}>Close</button>
-        </div>
-      </form>
-    {/if}
+    </div>
+  </dialog>
+  <article>
+    <Collapse onChange={value => isInactiveOpen = value} />
+    <h2>Inactive Players</h2>
+    <Helper text="inactive" title="Inactive Players Features" features={helperFeaturesOne} />
+    <div class:collapsed={!isInactiveOpen} class="person-container">
+      {#each people as person}
+        <Person 
+          name={person} 
+          addActivePlayer={addActivePlayer} 
+          showDialogElement={showDialogElement} 
+          maxActivePlayers={maxActivePlayers} 
+          activePlayers={activePlayers?.length}
+          limitMessageShowing={showMaxLimitMessage}
+        />
+      {/each}
+    </div>
+    <button class="options" on:click={optionsDialog.showModal()}>
+      Options
+    </button>
     {#if showMaxLimitMessage}
       <p class="limit-message">Active Player Limit Reached</p>
     {/if}
-    {#if !showPlayersForm}
-      <button class="add" on:click={() => showPlayersForm = true}>
-        Add Player
-      </button>
-    {/if}
+    <button class="add" on:click={addPlayerDialog.showModal()}>
+      Add Player
+    </button>
   </article>
   <article>
     {#if activePlayers?.length > 0}
@@ -270,6 +271,7 @@
     border-radius: 5px;
     padding: 5px 10px;
     margin-bottom: 15px;
+    font-size: 16px;
   }
 
   .options {
@@ -330,23 +332,6 @@
     border-radius: 5px;
     padding: 10px;
     width: 90%;
-  }
-
-  form.add-player-form, form.options-form {
-    border: 2px solid #ccc;
-    position: absolute;
-    right: 0;
-    left: 0;
-    margin: auto;
-    z-index: 1;
-  }
-
-  form.add-player-form {
-    bottom: -95px;
-  }
-
-  form.options-form {
-    bottom: -155px;
   }
 
   label {
@@ -447,10 +432,6 @@
     }
 
     p.message-text {
-      color: var(--grey-nine);
-    }
-
-    div.limits {
       color: var(--grey-nine);
     }
 
