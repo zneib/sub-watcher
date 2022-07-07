@@ -18,16 +18,18 @@
 
 <div on:click={handleClickOutside}>
   <dialog id={`${text}Dialog`}>
-    <h2>{title}</h2>
-    <form method="dialog">
-      <ul>
-        {#each features as feature}
-          <li>{feature}</li>
-        {/each}
-      </ul>
-    </form>
-    <div class="button-wrapper">
-      <button value="cancel" on:click={helperDialog.close()}>Close</button>
+    <div class="wrapper">
+      <h2>{title}</h2>
+      <form method="dialog">
+        <ul>
+          {#each features as feature}
+            <li>{feature}</li>
+          {/each}
+        </ul>
+      </form>
+      <div class="button-wrapper">
+        <button value="cancel" on:click={helperDialog.close()}>Close</button>
+      </div>
     </div>
   </dialog>
   <svg xmlns="http://www.w3.org/2000/svg"
@@ -43,6 +45,12 @@
 </div>
 
 <style>
+  dialog {
+    padding: 0;
+  }
+  div.wrapper {
+    padding: 16px;
+  }
   button {
     color: black;
     background-color: #fff;

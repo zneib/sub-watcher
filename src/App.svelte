@@ -83,16 +83,24 @@
     localStorage.removeItem('activePlayers');
     localStorage.setItem('people', JSON.stringify(people));
   }
+
+  const handleClickOutside = (event) => {
+    if (event.target.nodeName === "DIALOG") {
+      deleteDialog.close();
+    }
+  }
 </script>
 
 <main>
-  <dialog id="deleteDialog">
-    <form method="dialog">
-      <p>Remove <span style="font-weight: bold">{personToDelete}</span> as a player?</p>
-    </form>
-    <div class="button-wrapper">
-      <button value="cancel" on:click={deleteDialog.close()}>Cancel</button>
-      <button type="submit" value="default" on:click={deletePerson}>Confirm</button>
+  <dialog id="deleteDialog" on:click={handleClickOutside}>
+    <div class="wrapper">
+      <form method="dialog">
+        <p>Remove <span style="font-weight: bold">{personToDelete}</span> as a player?</p>
+      </form>
+      <div class="button-wrapper">
+        <button value="cancel" on:click={deleteDialog.close()}>Cancel</button>
+        <button type="submit" value="default" on:click={deletePerson}>Confirm</button>
+      </div>
     </div>
   </dialog>
   <article>
@@ -301,10 +309,15 @@
   dialog {
     border: 2px solid rgb(175, 175, 175);
     border-radius: 5px;
+    padding: 0;
   }
 
   dialog::backdrop {
     background-color: rgba(0,0,0,0.2);
+  }
+
+  dialog > div.wrapper {
+    padding: 16px;
   }
 
   h2 {
