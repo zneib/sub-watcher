@@ -40,7 +40,7 @@
   let people = JSON.parse(localStorage.getItem('people')) ?? [];
   let activePlayers = JSON.parse(localStorage.getItem('activePlayers')) ?? [];
 
-  $: showMaxLimitMessage = maxActivePlayers - activePlayers?.length === 0;
+  $: showMaxLimitMessage = maxActivePlayers - activePlayers?.length <= 0;
 
   const deletePerson = () => {
     people = people.filter((name) => name !== personToDelete);

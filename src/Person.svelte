@@ -8,7 +8,7 @@
   let showConfirmation = false;
 
   const handleClick = (name) => {
-    if (maxActivePlayers - activePlayers !== 0) {
+    if (maxActivePlayers - activePlayers >= 0) {
       addActivePlayer(name)
     } else {
       return;
