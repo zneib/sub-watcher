@@ -362,6 +362,7 @@
     margin-bottom: 15px;
     padding: 5px 10px;
     width: 100%;
+    font-size: 16px;
   }
 
   button {
