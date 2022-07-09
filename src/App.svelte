@@ -107,6 +107,7 @@
   <dialog id="addPlayerDialog" on:click={(e) => handleClickOutside(e, addPlayerDialog)}>
     <div class="wrapper">
       <form on:submit|preventDefault={addPlayer}>
+        <h3>Add Another Player</h3>
         <div>
           <label for="firstName">Name</label>
           <input type="text" name="firstName">
@@ -120,6 +121,7 @@
   </dialog>
   <dialog id="optionsDialog" on:click={(e) => handleClickOutside(e, optionsDialog)}>
     <div class="wrapper">
+      <h3>Player Options</h3>
       <form on:submit|preventDefault={addPlayer}>
         <div>
           <label for="activePlayerLimit">Active Players Limit</label>
@@ -312,6 +314,8 @@
     border: 2px solid rgb(175, 175, 175);
     border-radius: 5px;
     padding: 0;
+    min-width: 300px;
+    max-width: 350px;
   }
 
   dialog::backdrop {
@@ -322,7 +326,7 @@
     padding: 16px;
   }
 
-  h2 {
+  h2, h3 {
     margin-top: 0;
     text-align: center;
   }
@@ -331,7 +335,7 @@
     background: #fff;
     border-radius: 5px;
     padding: 10px;
-    width: 90%;
+    width: 100%;
   }
 
   label {
