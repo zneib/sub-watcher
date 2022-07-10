@@ -114,7 +114,7 @@
         </div>
         <div class="button-wrapper">
           <button type="submit">Add</button>
-          <button value="cancel" on:click={addPlayerDialog.close()}>Close</button>
+          <button value="cancel" on:click|preventDefault={addPlayerDialog.close()}>Close</button>
         </div>
       </form>
     </div>
@@ -152,7 +152,7 @@
           </select>
         </div>
         <div class="button-wrapper">
-          <button on:click={optionsDialog.close()}>Close</button>
+          <button on:click|preventDefault={optionsDialog.close()}>Close</button>
         </div>
       </form>
     </div>
