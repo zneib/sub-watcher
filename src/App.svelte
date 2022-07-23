@@ -5,6 +5,7 @@
   import Collapse from './Collapse.svelte';
   import Helper from './Helper.svelte';
   import DeleteDialog from './DeleteDialog.svelte';
+  import AddPlayerDialog from './AddPlayerDialog.svelte';
 
   let helperFeaturesOne = [
     'Add new players by clicking on the "Add Player" button.',
@@ -95,21 +96,7 @@
 
 <main>
   <DeleteDialog personToDelete={personToDelete} deletePerson={deletePerson} />
-  <dialog id="addPlayerDialog" on:click={(e) => handleClickOutside(e, addPlayerDialog)}>
-    <div class="wrapper">
-      <form on:submit|preventDefault={addPlayer}>
-        <h3>Add Another Player</h3>
-        <div>
-          <label for="firstName">Name</label>
-          <input type="text" name="firstName">
-        </div>
-        <div class="button-wrapper">
-          <button type="submit">Add</button>
-          <button value="cancel" on:click|preventDefault={addPlayerDialog.close()}>Close</button>
-        </div>
-      </form>
-    </div>
-  </dialog>
+  <AddPlayerDialog addPlayer={addPlayer} />
   <dialog id="optionsDialog" on:click={(e) => handleClickOutside(e, optionsDialog)}>
     <div class="wrapper">
       <h3>Player Options</h3>
