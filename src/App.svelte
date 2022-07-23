@@ -6,6 +6,7 @@
   import Helper from './Helper.svelte';
   import DeleteDialog from './DeleteDialog.svelte';
   import AddPlayerDialog from './AddPlayerDialog.svelte';
+import OptionsDialog from './OptionsDialog.svelte';
 
   let helperFeaturesOne = [
     'Add new players by clicking on the "Add Player" button.',
@@ -97,44 +98,7 @@
 <main>
   <DeleteDialog personToDelete={personToDelete} deletePerson={deletePerson} />
   <AddPlayerDialog addPlayer={addPlayer} />
-  <dialog id="optionsDialog" on:click={(e) => handleClickOutside(e, optionsDialog)}>
-    <div class="wrapper">
-      <h3>Player Options</h3>
-      <form on:submit|preventDefault={addPlayer}>
-        <div>
-          <label for="activePlayerLimit">Active Players Limit</label>
-          <select name="activePlayerLimit" bind:value={maxActivePlayers}>
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-            <option value={4}>4</option>
-            <option value={5}>5</option>
-            <option value={6}>6</option>
-            <option value={7} selected>7</option>
-            <option value={8}>8</option>
-            <option value={9}>9</option>
-            <option value={10}>10</option>
-          </select>
-        </div>
-        <div>
-          <label for="playTimeLimit">Player Time Limit - MM:SS</label>
-          <select name="playTimeLimit" bind:value={playTimeLimit}>
-            <option value="01:00">01:00</option>
-            <option value="03:00">03:00</option>
-            <option value="05:00" selected>05:00</option>
-            <option value="10:00">10:00</option>
-            <option value="15:00">15:00</option>
-            <option value="20:00">20:00</option>
-            <option value="25:00">25:00</option>
-            <option value="30:00">30:00</option>
-          </select>
-        </div>
-        <div class="button-wrapper">
-          <button on:click|preventDefault={optionsDialog.close()}>Close</button>
-        </div>
-      </form>
-    </div>
-  </dialog>
+  <OptionsDialog bind:maxActivePlayers={maxActivePlayers} bind:playTimeLimit={playTimeLimit} />
   <article>
     <Collapse onChange={value => isInactiveOpen = value} />
     <h2>Inactive Players</h2>
