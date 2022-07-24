@@ -1,18 +1,13 @@
 <script>
   import { onMount } from 'svelte';
+  import { handleClickOutside } from './helpers';
   export let personToDelete = '';
   export let deletePerson;
 
   let deleteDialog;
   onMount(() => {
     deleteDialog = document.getElementById('deleteDialog');
-  })
-
-  const handleClickOutside = (event, dialog) => {
-    if (event.target.nodeName === "DIALOG") {
-      dialog.close();
-    }
-  }
+  });
 </script>
 
 <dialog id="deleteDialog" on:click={(e) => handleClickOutside(e, deleteDialog)}>

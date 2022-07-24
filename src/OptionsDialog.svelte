@@ -1,18 +1,13 @@
 <script>
   import { onMount } from 'svelte';
+  import { handleClickOutside } from './helpers';
   export let maxActivePlayers;
   export let playTimeLimit;
 
   let optionsDialog;
   onMount(() => {
     optionsDialog = document.getElementById('optionsDialog');
-  })
-
-  const handleClickOutside = (event, dialog) => {
-    if (event.target.nodeName === "DIALOG") {
-      dialog.close();
-    }
-  }
+  });
 </script>
 
 <dialog id="optionsDialog" on:click={(e) => handleClickOutside(e, optionsDialog)}>

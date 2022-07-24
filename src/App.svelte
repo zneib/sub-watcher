@@ -6,7 +6,7 @@
   import Helper from './Helper.svelte';
   import DeleteDialog from './DeleteDialog.svelte';
   import AddPlayerDialog from './AddPlayerDialog.svelte';
-import OptionsDialog from './OptionsDialog.svelte';
+  import OptionsDialog from './OptionsDialog.svelte';
 
   let helperFeaturesOne = [
     'Add new players by clicking on the "Add Player" button.',
@@ -86,12 +86,6 @@ import OptionsDialog from './OptionsDialog.svelte';
     activePlayers = [];
     localStorage.removeItem('activePlayers');
     localStorage.setItem('people', JSON.stringify(people));
-  }
-
-  const handleClickOutside = (event, dialog) => {
-    if (event.target.nodeName === "DIALOG") {
-      dialog.close();
-    }
   }
 </script>
 
