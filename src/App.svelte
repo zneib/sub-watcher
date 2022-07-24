@@ -277,10 +277,6 @@ import OptionsDialog from './OptionsDialog.svelte';
       flex-direction: column;
     }
 
-    dialog {
-      width: 90%;
-    }
-
     article {
       width: 90%;
       margin-top: 25px;
@@ -299,24 +295,8 @@ import OptionsDialog from './OptionsDialog.svelte';
       color: var(--grey-eight);
     }
 
-    dialog {
-      color: var(--grey-nine);
-      background-color: var(--grey-four);
-      border: 2px solid var(--grey-six);
-    }
-
-    dialog::backdrop {
-      background-color: rgba(0,0,0,0.4);
-    }
-
     p.limit-message {
       color: var(--grey-nine);
-    }
-
-    select {
-      border: 2px solid var(--grey-six);
-      color: var(--grey-nine);
-      background-color: var(--grey-four);
     }
 
     h2 {
@@ -331,21 +311,6 @@ import OptionsDialog from './OptionsDialog.svelte';
       color: var(--grey-nine);
       background-color: var(--grey-four);
       border: 2px solid var(--grey-six);
-    }
-    form {
-      background-color: var(--grey-four);
-    }
-
-    label {
-      color: var(--grey-nine);
-    }
-
-    input {
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      margin-bottom: 15px;
-      padding: 5px 10px;
-      width: 100%;
     }
   }
   @media (prefers-color-scheme: light) {
