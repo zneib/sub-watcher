@@ -69,4 +69,25 @@
     display: flex;
     justify-content: space-between;
   }
+  @media (prefers-color-scheme: dark) {
+    dialog {
+      color: var(--grey-nine);
+      background-color: var(--grey-four);
+      border: 2px solid var(--grey-six);
+    }
+
+    dialog::backdrop {
+      background-color: rgba(0,0,0,0.4);
+    }
+
+    button {
+      color: var(--grey-nine);
+      background-color: var(--grey-four);
+      border: 2px solid var(--grey-six);
+    }
+    form {
+      background-color: var(--grey-four);
+    }
+  }
+
 </style>

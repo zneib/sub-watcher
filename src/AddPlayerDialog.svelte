@@ -77,4 +77,42 @@
     display: flex;
     justify-content: space-between;
   }
+  @media (prefers-color-scheme: dark) {
+
+    dialog {
+      color: var(--grey-nine);
+      background-color: var(--grey-four);
+      border: 2px solid var(--grey-six);
+    }
+
+    dialog::backdrop {
+      background-color: rgba(0,0,0,0.4);
+    }
+
+    h3 {
+      color: var(--grey-nine);
+    }
+
+    button {
+      color: var(--grey-nine);
+      background-color: var(--grey-four);
+      border: 2px solid var(--grey-six);
+    }
+    form {
+      background-color: var(--grey-four);
+    }
+
+    label {
+      color: var(--grey-nine);
+    }
+
+    input {
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+      padding: 5px 10px;
+      width: 100%;
+    }
+  }
+
 </style>

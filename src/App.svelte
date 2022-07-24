@@ -208,16 +208,6 @@ import OptionsDialog from './OptionsDialog.svelte';
     margin-right: 10px;
   }
 
-  select {
-    width: 100%;
-    background: #fff;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    padding: 5px 10px;
-    margin-bottom: 15px;
-    font-size: 16px;
-  }
-
   .options {
     width: 100px;
     position: absolute;
@@ -252,48 +242,9 @@ import OptionsDialog from './OptionsDialog.svelte';
     margin: auto;
   }
 
-  dialog {
-    border: 2px solid rgb(175, 175, 175);
-    border-radius: 5px;
-    padding: 0;
-    min-width: 300px;
-    max-width: 350px;
-  }
-
-  dialog::backdrop {
-    background-color: rgba(0,0,0,0.2);
-  }
-
-  dialog > div.wrapper {
-    padding: 16px;
-  }
-
-  h2, h3 {
+  h2 {
     margin-top: 0;
     text-align: center;
-  }
-
-  form {
-    background: #fff;
-    border-radius: 5px;
-    padding: 10px;
-    width: 100%;
-  }
-
-  label {
-    display: block;
-    text-transform: uppercase;
-    font-size: 10px;
-    margin-bottom: 5px;
-  }
-
-  input {
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-bottom: 15px;
-    padding: 5px 10px;
-    width: 100%;
-    font-size: 16px;
   }
 
   button {
@@ -308,11 +259,6 @@ import OptionsDialog from './OptionsDialog.svelte';
   }
   button:hover {
     border: 2px solid rgb(129, 129, 129);
-  }
-  
-  .button-wrapper {
-    display: flex;
-    justify-content: space-between;
   }
 
   p.message-text {

@@ -83,6 +83,16 @@
     text-align: center;
   }
 
+  select {
+    width: 100%;
+    background: #fff;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+
   button {
     color: black;
     font-weight: normal;
@@ -101,4 +111,41 @@
     display: flex;
     justify-content: space-between;
   }
+
+  @media (max-width: 768px) {
+    dialog {
+      width: 90%;
+    }
+  }
+  @media (prefers-color-scheme: dark) {
+    dialog {
+      color: var(--grey-nine);
+      background-color: var(--grey-four);
+      border: 2px solid var(--grey-six);
+    }
+
+    dialog::backdrop {
+      background-color: rgba(0,0,0,0.4);
+    }
+
+    select {
+      border: 2px solid var(--grey-six);
+      color: var(--grey-nine);
+      background-color: var(--grey-four);
+    }
+
+    button {
+      color: var(--grey-nine);
+      background-color: var(--grey-four);
+      border: 2px solid var(--grey-six);
+    }
+    form {
+      background-color: var(--grey-four);
+    }
+
+    label {
+      color: var(--grey-nine);
+    }
+  }
+
 </style>
